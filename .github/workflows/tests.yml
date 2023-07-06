@@ -34,3 +34,6 @@ jobs:
   
         - name: Run tests
           run: mvn test --quiet --batch-mode
+
+        - name: Upload coverage reports to Codecov
+          run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
