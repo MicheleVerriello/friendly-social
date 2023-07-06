@@ -8,6 +8,10 @@ on:
       branches:
         - 'master'
 
+defaults:
+  run:
+    working-directory: ./friend-events-apis
+
 jobs:
     tests:
       runs-on: ubuntu-latest
@@ -21,8 +25,6 @@ jobs:
   
         - name: Checkout code
           uses: actions/checkout@v2
-          with:
-            path: friend-events-social/friend-events-apis
   
         - name: Clean with Maven
           run: mvn clean --quiet --batch-mode
