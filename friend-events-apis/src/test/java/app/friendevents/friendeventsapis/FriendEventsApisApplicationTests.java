@@ -14,9 +14,9 @@ class FriendEventsApisApplicationTests {
         Assertions.assertTrue(true);
     }
 
-//    @Test
-//    void testNotOk() {
-//        Assertions.assertTrue(false);
-//    }
+    @Test
+    void testNotOk() {
+        Assertions.assertTrue(false);
+    }
 
 }
