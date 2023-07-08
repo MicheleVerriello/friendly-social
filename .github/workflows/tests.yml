@@ -32,5 +32,10 @@ jobs:
         - name: Run tests
           run: mvn test --quiet --batch-mode
 
+        - name: Lint Code Base 
+          uses: github/super-linter@v4 
+
         - name: Upload coverage reports to Codecov
-          run: curl -s https://codecov.io/bash | bash -s -- -t ${{ secrets.CODECOV_TOKEN }}
+          uses: codecov/codecov-action@v3
+          env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
