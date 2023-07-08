@@ -27,7 +27,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindById() {
+    public void findById() {
         // Mocking the behavior of the repository
         Long id = 1L;
         User user = new User("testmail@mail.com", "username", "hashedPassword", 1L);
@@ -38,5 +38,33 @@ public class UserServiceTest {
 
         // Verifying the result
         assertEquals(result, Optional.of(user));
+    }
+
+    @Test
+    public void findById_ReturnNull() {
+        // Mocking the behavior of the repository
+        Long id = 1L;
+        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L);
+        when(userRepository.findById(id)).thenReturn(Optional.empty());
+
+        // Calling the service method
+        Optional<User> result = userService.getUserById(id);
+
+        // Verifying the result
+        assertEquals(result, Optional.empty());
+    }
+
+    @Test
+    public void createUser() {
+        // Mocking the behavior of the repository
+        Long id = 1L;
+        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L);
+        when(userRepository.save(user)).thenReturn(user);
+
+        // Calling the service method
+        User result = userService.createUser(user);
+
+        // Verifying the result
+        assertEquals(result, user);
     }
 }
