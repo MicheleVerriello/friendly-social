@@ -26,16 +26,16 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v2
   
-        - name: Build with Maven
-          run: mvn clean install
+        - name: Build with Maven and Lint
+          run: mvn clean install -P lint 
   
         - name: Run tests
           run: mvn test --quiet --batch-mode
 
-        - name: Lint Code Base 
-          uses: github/super-linter@v4 
-          env:
-            GITHUB_TOKEN: ${{ secrets.LINTER_TOKEN }}
+        # - name: Lint Code Base 
+        #   uses: github/super-linter@v4 
+        #   env:
+            # GITHUB_TOKEN: secrets.LINTER_TOKEN }}
 
         - name: Upload coverage reports to Codecov
           uses: codecov/codecov-action@v3
