@@ -11,8 +11,12 @@ import org.mockito.MockitoAnnotations;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
+/**
+ * Test class for the UserService
+ */
 public class UserServiceTest {
 
     @Mock
@@ -44,7 +48,6 @@ public class UserServiceTest {
     public void findById_ReturnNull() {
         // Mocking the behavior of the repository
         Long id = 1L;
-        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L);
         when(userRepository.findById(id)).thenReturn(Optional.empty());
 
         // Calling the service method
@@ -57,7 +60,6 @@ public class UserServiceTest {
     @Test
     public void createUser() {
         // Mocking the behavior of the repository
-        Long id = 1L;
         User user = new User("testmail@mail.com", "username", "hashedPassword", 1L);
         when(userRepository.save(user)).thenReturn(user);
 
@@ -66,5 +68,18 @@ public class UserServiceTest {
 
         // Verifying the result
         assertEquals(result, user);
+    }
+
+    @Test
+    public void createUser_ReturnNull() {
+        // Mocking the behavior of the repository
+        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L);
+        when(userRepository.save(user)).thenReturn(null);
+
+        // Calling the service method
+        User result = userService.createUser(user);
+
+        // Verifying the result
+        assertNull(result);
     }
 }
