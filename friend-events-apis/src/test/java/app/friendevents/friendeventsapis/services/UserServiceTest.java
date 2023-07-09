@@ -34,7 +34,7 @@ public class UserServiceTest {
     public void findById() {
         // Mocking the behavior of the repository
         Long id = 1L;
-        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L);
+        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L, "name", "surname");
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
 
         // Calling the service method
@@ -60,7 +60,7 @@ public class UserServiceTest {
     @Test
     public void createUser() {
         // Mocking the behavior of the repository
-        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L);
+        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L, "name", "surname");
         when(userRepository.save(user)).thenReturn(user);
 
         // Calling the service method
@@ -73,7 +73,7 @@ public class UserServiceTest {
     @Test
     public void createUser_ReturnNull() {
         // Mocking the behavior of the repository
-        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L);
+        User user = new User("testmail@mail.com", "username", "hashedPassword", 1L, "name", "surname");
         when(userRepository.save(user)).thenReturn(null);
 
         // Calling the service method

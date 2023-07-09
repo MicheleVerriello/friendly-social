@@ -50,6 +50,10 @@
             <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -77,6 +81,15 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/friendevents</url>
+                    <user>postgres</user>
+                </configuration>
             </plugin>
         </plugins>
     </build>
