@@ -1,4 +1,3 @@
 package app.friendevents.friendeventsapis.controllers;
 
-public class UserControllerTest {
-}
+public class UserControllerTest {}

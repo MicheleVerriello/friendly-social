@@ -2,14 +2,12 @@ package app.friendevents.friendeventsapis.services;
 
 import app.friendevents.friendeventsapis.pojos.User;
 import app.friendevents.friendeventsapis.repositories.IUserRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class UserService {
-
     private final IUserRepository userRepository;
 
     @Autowired

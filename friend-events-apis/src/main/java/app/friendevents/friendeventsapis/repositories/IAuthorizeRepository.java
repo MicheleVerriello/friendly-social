@@ -5,5 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IAuthorizeRepository extends CrudRepository<User, Long> {
-}
+public interface IAuthorizeRepository extends CrudRepository<User, Long> {}

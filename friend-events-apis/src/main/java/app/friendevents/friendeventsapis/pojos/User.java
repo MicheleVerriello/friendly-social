@@ -4,14 +4,20 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class User extends BaseTable {
-
     String email;
     String username;
     String password;
     String name;
     String surname;
 
-    public User(String email, String username, String password, Long id, String name, String surname) {
+    public User(
+        String email,
+        String username,
+        String password,
+        Long id,
+        String name,
+        String surname
+    ) {
         this.email = email;
         this.username = username;
         this.password = password;
@@ -63,10 +69,22 @@ public class User extends BaseTable {
     }
 
     public String toString() {
-        return "id: " + (this.getId() != null ? this.getId() : "null") + "\n" +
-                "name: " + (this.getName() != null ? this.getName() : "null") + "\n" +
-                "surname: " + (this.getSurname() != null ? this.getSurname() : "null") + "\n" +
-                "email: " + (this.getEmail() != null ? this.getEmail() : "null") + "\n" +
-                "username: " + (this.getUsername() != null ? this.getUsername() : "null") + "\n";
+        return (
+            "id: " +
+            (this.getId() != null ? this.getId() : "null") +
+            "\n" +
+            "name: " +
+            (this.getName() != null ? this.getName() : "null") +
+            "\n" +
+            "surname: " +
+            (this.getSurname() != null ? this.getSurname() : "null") +
+            "\n" +
+            "email: " +
+            (this.getEmail() != null ? this.getEmail() : "null") +
+            "\n" +
+            "username: " +
+            (this.getUsername() != null ? this.getUsername() : "null") +
+            "\n"
+        );
     }
 }

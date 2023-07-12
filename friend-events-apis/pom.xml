@@ -91,7 +91,64 @@
                     <user>postgres</user>
                 </configuration>
             </plugin>
+
+            <!-- Git Hooks plugins -->
+
+            <!-- plugin for commit message style -->
+            <plugin>
+                <groupId>com.rudikershaw.gitbuildhook</groupId>
+                <artifactId>git-build-hook-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <installHooks>
+                        <commit-msg>hooks/commit-msg</commit-msg>
+                        <pre-commit>hooks/pre-commit</pre-commit>
+                    </installHooks>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- plugin for code formatting -->
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>2.37.0</version>
+                <configuration>
+                    <formats>
+                        <!-- prettier with java-plugin -->
+                        <format>
+                            <includes>
+                                <include>src/*/java/**/*.java</include>
+                            </includes>
+
+                            <prettier>
+                                <devDependencies>
+                                    <prettier>2.0.5</prettier>
+                                    <prettier-plugin-java>0.8.0</prettier-plugin-java>
+                                </devDependencies>
+                                <config>
+                                    <tabWidth>4</tabWidth>
+                                    <parser>java</parser>
+                                </config>
+                            </prettier>
+                        </format>
+                    </formats>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 </project>

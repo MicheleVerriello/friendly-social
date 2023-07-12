@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorizeService {
-
     @Autowired
     IAuthorizeRepository authorizeRepository;
 }
