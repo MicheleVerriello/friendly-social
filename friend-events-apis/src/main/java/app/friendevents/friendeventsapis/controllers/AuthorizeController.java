@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/authorize")
 public class AuthorizeController {
+
+
+
+
     
 
 
