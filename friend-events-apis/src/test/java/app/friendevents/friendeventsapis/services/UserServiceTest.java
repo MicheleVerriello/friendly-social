@@ -3,6 +3,7 @@ package app.friendevents.friendeventsapis.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.openMocks;
 
 import app.friendevents.friendeventsapis.pojos.User;
 import app.friendevents.friendeventsapis.repositories.IUserRepository;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 /**
  * Test class for the UserService
@@ -25,7 +25,7 @@ public class UserServiceTest {
 
     @BeforeEach
     public void setup() {
-        MockitoAnnotations.openMocks(this); //this initialize mocks
+        openMocks(this); //this initialize mocks
     }
 
     @Test
