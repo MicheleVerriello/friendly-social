@@ -1,12 +1,15 @@
 package app.friendevents.friendeventsapis.pojos;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.sql.Timestamp;
 
 @Entity
 public class BaseTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     Timestamp creationDate;
