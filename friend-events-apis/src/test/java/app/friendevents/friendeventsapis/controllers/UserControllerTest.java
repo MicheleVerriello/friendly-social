@@ -8,7 +8,6 @@ import app.friendevents.friendeventsapis.pojos.User;
 import app.friendevents.friendeventsapis.services.UserService;
 import com.google.gson.Gson;
 import jakarta.annotation.security.RunAs;
-
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -52,31 +51,27 @@ public class UserControllerTest {
         Mockito.verify(userService, Mockito.times(1)).getUserById(1L);
     }
 
-//    @Test
-//    public void getUserById_NotFound() throws Exception {
-//
-//        Mockito.when(userService.getUserById(1L)).thenReturn(Optional.empty());
-//
-//        mockMvc.perform(get("/users/1")).andExpect(status().isNotFound());
-//
-//        Mockito.verify(userService, Mockito.times(1)).getUserById(1L);
-//    }
+    //    @Test
+    //    public void getUserById_NotFound() throws Exception {
+    //
+    //        Mockito.when(userService.getUserById(1L)).thenReturn(Optional.empty());
+    //
+    //        mockMvc.perform(get("/users/1")).andExpect(status().isNotFound());
+    //
+    //        Mockito.verify(userService, Mockito.times(1)).getUserById(1L);
+    //    }
 
     @Test
     public void createUser() throws Exception {
-
-
-
-        
         Gson gson = new Gson();
 
         User user = new User(
-                "email1@mail.com",
-                "username1",
-                "pass1",
-                null,
-                "name1",
-                "surname1"
+            "email1@mail.com",
+            "username1",
+            "pass1",
+            null,
+            "name1",
+            "surname1"
         );
 
         String jsonUser = gson.toJson(user);
@@ -84,14 +79,19 @@ public class UserControllerTest {
 
         User userResponse = user;
         userResponse.setId(1L);
-        userResponse.setCreationDate(new Timestamp(Instant.now().toEpochMilli()));
+        userResponse.setCreationDate(
+            new Timestamp(Instant.now().toEpochMilli())
+        );
 
         Mockito.when(userService.createUser(user)).thenReturn(userResponse);
 
-        mockMvc.perform(post("/users/")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonUser))
-                .andExpect(status().isOk());
+        mockMvc
+            .perform(
+                post("/users/")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(jsonUser)
+            )
+            .andExpect(status().isOk());
 
         Mockito.verify(userService, Mockito.times(1)).createUser(Mockito.any());
     }
