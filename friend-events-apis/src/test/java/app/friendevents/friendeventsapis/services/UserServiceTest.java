@@ -36,7 +36,7 @@ public class UserServiceTest {
             "testmail@mail.com",
             "username",
             "hashedPassword",
-            1L,
+            id,
             "name",
             "surname"
         );

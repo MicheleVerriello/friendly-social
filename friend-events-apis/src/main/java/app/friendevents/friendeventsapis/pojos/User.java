@@ -83,8 +83,7 @@ public class User extends BaseTable {
             (this.getEmail() != null ? this.getEmail() : "null") +
             "\n" +
             "username: " +
-            (this.getUsername() != null ? this.getUsername() : "null") +
-            "\n"
+            (this.getUsername() != null ? this.getUsername() : "null")
         );
     }
 }
