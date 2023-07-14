@@ -1,5 +1,5 @@
+---
 name: Lint Pipeline
-
 
 on:
   push:
@@ -18,9 +18,7 @@ defaults:
 ###############
 jobs:
   build:
-    # Name the Job
     name: Lint Code Base
-    # Set the agent to run on
     runs-on: ubuntu-latest
 
     ############################################
@@ -51,6 +49,6 @@ jobs:
       - name: Lint Code Base
         uses: super-linter/super-linter@v5
         env:
-          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

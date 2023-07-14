@@ -15,6 +15,11 @@ defaults:
 jobs:
     tests:
       runs-on: ubuntu-latest
+
+      permissions:
+        contents: read
+        packages: read
+        statuses: write
   
       steps:
         - name: Set up JDK
@@ -24,7 +29,7 @@ jobs:
             java-version: '17'  # Specify the Java version you need
   
         - name: Checkout code
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
   
         - name: Build with Maven
           run: mvn clean install -DskipTests=true 
@@ -32,10 +37,12 @@ jobs:
         - name: Run tests
           run: mvn test --quiet --batch-mode
 
-        # - name: Lint Code Base 
-        #   uses: github/super-linter@v4 
-        #   env:
-            # GITHUB_TOKEN: secrets.LINTER_TOKEN }}
+        - name: Lint Code Base
+          uses: super-linter/super-linter@v5
+          env:
+            VALIDATE_ALL_CODEBASE: true
+            DEFAULT_BRANCH: master
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         - name: Upload coverage reports to Codecov
           uses: codecov/codecov-action@v3
