@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class GenericController {
 
     /**
-     * Simple endpoint to ping the app and see if it's running
+     * Simple endpoint to ping the app and see if it's running.
+     * @return The app status
      */
     @GetMapping("/ping")
     public String ping() {
