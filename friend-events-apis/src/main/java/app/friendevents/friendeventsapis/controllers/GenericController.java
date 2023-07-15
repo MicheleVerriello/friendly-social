@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/generic")
 public class GenericController {
 
+    /**
+     * Simple endpoint to ping the app and see if it's running
+     */
     @GetMapping("/ping")
     public String ping() {
         return "App Live";
