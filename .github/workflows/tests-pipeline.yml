@@ -41,3 +41,13 @@ jobs:
           uses: codecov/codecov-action@v3
           env:
             CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+        - name: Check coverage percentage
+          run: |
+            coverage=$(curl -s https://codecov.io/gh/${{ github.repository }}/branch/${{ github.ref }}/graphs/sunburst | grep -o -P "(?<= data-label=\"Total\">).*(?=\%<)")
+            if [[ $coverage -lt 80 ]]; then
+              echo "Coverage is less than 80%."
+              exit 1
+            else
+              echo "Coverage is greater than 80%."
+            fi
