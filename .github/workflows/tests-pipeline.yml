@@ -45,7 +45,7 @@ jobs:
         - name: Check coverage percentage
           run: |
             tree/master
-            coverage=$(curl -s https://codecov.io/gh/${{ github.repository }} | grep -o -P "(?<= data-testid=\"number-value\">).*(?=\%<)")
+            coverage=$(curl -s https://codecov.io/gh/${{ github.repository }} | grep -o -P "(?<=  <span data-testid="number-value" class="font-lato">).*(?=\%<)")
             if [[ $coverage -lt 80 ]]; then
               echo "Coverage is less than 80%."
               exit 1
