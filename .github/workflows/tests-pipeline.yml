@@ -44,7 +44,8 @@ jobs:
 
         - name: Check coverage percentage
           run: |
-            coverage=$(curl -s https://codecov.io/gh/${{ github.repository }}/branch/${{ github.ref }}/graphs/sunburst | grep -o -P "(?<= data-label=\"Total\">).*(?=\%<)")
+            tree/master
+            coverage=$(curl -s https://codecov.io/gh/${{ github.repository }}/tree/master/graphs/sunburst | grep -o -P "(?<= data-testid=\"number-value\">).*(?=\%<)")
             if [[ $coverage -lt 80 ]]; then
               echo "Coverage is less than 80%."
               exit 1
