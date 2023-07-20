@@ -42,6 +42,17 @@ jobs:
           # Full git history is needed to get a proper
           # list of changed files within `super-linter`
           fetch-depth: 0
+          
+      ######################################################
+      # Cache the super-linter action to speed up pipeline #
+      ######################################################
+      - name: Cache Super-Linter
+        uses: actions/cache@v3.2.6
+        with:
+          path: ~/.cache/super-linter
+          key: super-linter-${{ hashFiles('friend-events-apis/.github/workflows/lint.yml') }}
+          restore-keys: |
+            super-linter-
 
       ################################
       # Run Linter against code base #
