@@ -47,10 +47,10 @@ jobs:
       # Cache the super-linter action to speed up pipeline #
       ######################################################
       - name: Cache Super-Linter
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v2
         with:
           path: ~/.cache/super-linter
-          key: super-linter-${{ hashFiles('friend-events-apis/.github/workflows/lint.yml') }}
+          key: super-linter-key
           restore-keys: |
             super-linter-
 
