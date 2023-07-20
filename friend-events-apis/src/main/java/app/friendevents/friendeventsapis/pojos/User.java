@@ -6,14 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "users")
 public class User extends BaseTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
-    @SequenceGenerator(
-        name = "users_seq",
-        sequenceName = "users_seq",
-        allocationSize = 1
-    )
-    Long id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     String email;
     String username;
     String password;

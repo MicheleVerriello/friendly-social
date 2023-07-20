@@ -126,41 +126,41 @@
                 </configuration>
             </plugin>
 
-            <!-- plugin for code formatting -->
-            <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.37.0</version>
-                <configuration>
-                    <formats>
-                        <!-- prettier with java-plugin -->
-                        <format>
-                            <includes>
-                                <include>src/*/java/**/*.java</include>
-                            </includes>
+<!--            &lt;!&ndash; plugin for code formatting &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>com.diffplug.spotless</groupId>-->
+<!--                <artifactId>spotless-maven-plugin</artifactId>-->
+<!--                <version>2.37.0</version>-->
+<!--                <configuration>-->
+<!--                    <formats>-->
+<!--                        &lt;!&ndash; prettier with java-plugin &ndash;&gt;-->
+<!--                        <format>-->
+<!--                            <includes>-->
+<!--                                <include>src/*/java/**/*.java</include>-->
+<!--                            </includes>-->
 
-                            <prettier>
-                                <devDependencies>
-                                    <prettier>2.0.5</prettier>
-                                    <prettier-plugin-java>0.8.0</prettier-plugin-java>
-                                </devDependencies>
-                                <config>
-                                    <tabWidth>4</tabWidth>
-                                    <parser>java</parser>
-                                </config>
-                            </prettier>
-                        </format>
-                    </formats>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>apply</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--                            <prettier>-->
+<!--                                <devDependencies>-->
+<!--                                    <prettier>2.0.5</prettier>-->
+<!--                                    <prettier-plugin-java>0.8.0</prettier-plugin-java>-->
+<!--                                </devDependencies>-->
+<!--                                <config>-->
+<!--                                    <tabWidth>4</tabWidth>-->
+<!--                                    <parser>java</parser>-->
+<!--                                </config>-->
+<!--                            </prettier>-->
+<!--                        </format>-->
+<!--                    </formats>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>verify</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>apply</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 </project>
