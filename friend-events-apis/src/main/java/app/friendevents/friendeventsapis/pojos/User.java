@@ -1,9 +1,13 @@
 package app.friendevents.friendeventsapis.pojos;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User extends BaseTable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     String email;
     String username;
     String password;
@@ -27,6 +31,14 @@ public class User extends BaseTable {
     }
 
     public User() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;
