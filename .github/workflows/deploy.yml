@@ -38,7 +38,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: {{defaultContext}}:friend-events-apis
+          context: "{{defaultContext}}:friend-events-apis"
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/backend:latest
 
