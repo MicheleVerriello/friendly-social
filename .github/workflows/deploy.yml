@@ -58,17 +58,17 @@ jobs:
 
       - name: Set permissions for private key
         run: |
-          echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key && chmod 400 private_key
+          echo "${{ secrets.AWS_PRIVATE_KEY }}" > sshconnection.pem && chmod 400 sshconnection.pem
 
       - name: Pull Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@${{ secrets.EC2_IP }} 'sudo docker pull ${{ secrets.DOCKERHUB_USER }}/backend:latest'
+          ssh -o StrictHostKeyChecking=no -i sshconnection.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker pull ${{ secrets.DOCKERHUB_USER }}/backend:latest'
 
       - name: Stop running container
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@${{ secrets.EC2_IP }} 'sudo docker stop backend || true'
-          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@${{ secrets.EC2_IP }} 'sudo docker rm backend || true'
+          ssh -o StrictHostKeyChecking=no -i sshconnection.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker stop backend || true'
+          ssh -o StrictHostKeyChecking=no -i sshconnection.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker rm backend || true'
 
       - name: Run new container
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@${{ secrets.EC2_IP }} 'sudo docker run -d --name backend -p 8080:8080 ${{ secrets.DOCKERHUB_USER }}/backend:latest'
+          ssh -o StrictHostKeyChecking=no -i sshconnection.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker run -d --name backend -p 8080:8080 ${{ secrets.DOCKERHUB_USER }}/backend:latest'
