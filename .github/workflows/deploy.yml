@@ -62,13 +62,13 @@ jobs:
 
       - name: Pull Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker pull ${{ secrets.DOCKERHUB_USER }}/backend:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ip-172-31-37-70 'sudo docker pull ${{ secrets.DOCKERHUB_USER }}/backend:latest'
 
       - name: Stop running container
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker stop backend || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker rm backend || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ip-172-31-37-70 'sudo docker stop backend || true'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ip-172-31-37-70 'sudo docker rm backend || true'
 
       - name: Run new container
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker run -d --name backend -p 8080:8080 ${{ secrets.DOCKERHUB_USER }}/backend:latest'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@ip-172-31-37-70 'sudo docker run -d --name backend -p 8080:8080 ${{ secrets.DOCKERHUB_USER }}/backend:latest'
