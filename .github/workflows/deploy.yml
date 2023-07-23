@@ -9,12 +9,6 @@ on:
     branches:
       - 'master'
 
-env:
-  DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-  AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-  AWS_EC2_INSTANCE_IP_ADDRESS: ${{ secrets.EC2_IP }}
-
 defaults:
   run:
     working-directory: ./friend-events-apis
@@ -59,7 +53,7 @@ jobs:
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.5.0
         with:
-          ssh-private-key: ${{ secrets.AWS_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
 #      - name: Set permissions for private key
 #        run: |
@@ -67,13 +61,13 @@ jobs:
 
       - name: Pull Docker image
         run: |
-          ssh -i ${{ secrets.AWS_PRIVATE_KEY }} ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker pull ${{ secrets.DOCKERHUB_USER }}/backend:latest'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker pull ${{ secrets.DOCKERHUB_USER }}/backend:latest'
 
       - name: Stop running container
         run: |
-          ssh -i ${{ secrets.AWS_PRIVATE_KEY }} ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker stop backend || true'
-          ssh -i ${{ secrets.AWS_PRIVATE_KEY }} ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker rm backend || true'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker stop backend || true'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker rm backend || true'
 
       - name: Run new container
         run: |
-          ssh -i ${{ secrets.AWS_PRIVATE_KEY }} ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker run -d --name backend -p 8080:8080 ${{ secrets.DOCKERHUB_USER }}/backend:latest'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker run -d --name backend -p 8080:8080 ${{ secrets.DOCKERHUB_USER }}/backend:latest'
