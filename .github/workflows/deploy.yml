@@ -74,14 +74,14 @@ jobs:
         run: |
           ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'cd friend-events-social && git pull'
 
-      - name: Remove all docker containers
-        run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker rm $(docker ps -a -q)'
+#      - name: Remove all docker containers
+#        run: |
+#          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'sudo docker rm $(docker ps -a -q)'
 
       - name: Build Docker image
         run: |
           ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'cd friend-events-social/friend-events-apis && sudo docker build -t spring-backend .'
 
-      - name: Run new container
+      - name: Restart container
         run: |
           ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" ubuntu@ec2-13-51-85-166.eu-north-1.compute.amazonaws.com 'cd friend-events-social/friend-events-apis && sudo docker-compose up'
