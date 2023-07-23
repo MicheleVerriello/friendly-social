@@ -8,13 +8,13 @@ on:
   pull_request:
     branches:
       - 'master'
-
-#defaults:
-#  run:
-#    working-directory: ./friend-events-apis
+  workflow_run:
+    workflows:
+      - "Tests" # The name of the workflow to depend on
+    types:
+      - completed
 
 jobs:
-
 #  build:
 #    runs-on: ubuntu-latest
 #    steps:
