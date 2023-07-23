@@ -56,9 +56,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set permissions for private key
-        run: |
-          echo "${{ secrets.AWS_PRIVATE_KEY }}" > sshconnection.pem && chmod 400 sshconnection.pem
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.AWS_PRIVATE_KEY }}
+
+#      - name: Set permissions for private key
+#        run: |
+#          echo "${{ secrets.AWS_PRIVATE_KEY }}" > sshconnection.pem && chmod 400 sshconnection.pem
 
       - name: Pull Docker image
         run: |
