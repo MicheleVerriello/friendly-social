@@ -9,9 +9,9 @@ on:
     branches:
       - 'master'
 
-defaults:
-  run:
-    working-directory: ./friend-events-apis
+#defaults:
+#  run:
+#    working-directory: ./friend-events-apis
 
 jobs:
 
