@@ -68,24 +68,24 @@ jobs:
 
       - name: Pull git repository
         run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" $EC2_INSTANCE 'cd friend-events-social && git pull'
+          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'cd friend-events-social && git pull'
 
       - name: Stop all docker containers
         run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" $EC2_INSTANCE 'sudo docker stop $(sudo docker ps -a -q)'
+          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'sudo docker stop $(sudo docker ps -a -q)'
 
       - name: Remove all docker containers
         run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" $EC2_INSTANCE 'sudo docker rm $(sudo docker ps -a -q)'
+          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'sudo docker rm $(sudo docker ps -a -q)'
 
       - name: Remove all docker images
         run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" $EC2_INSTANCE 'sudo docker rmi $(sudo docker images -q)'
+          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'sudo docker rmi $(sudo docker images -q)'
 
       - name: Build Backend Docker image
         run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" $EC2_INSTANCE 'cd friend-events-social/friend-events-apis && sudo docker build -t spring-backend .'
+          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'cd friend-events-social/friend-events-apis && sudo docker build -t spring-backend .'
 
       - name: Start container
         run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" $EC2_INSTANCE 'cd friend-events-social/friend-events-apis && sudo docker-compose up -d'
+          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'cd friend-events-social/friend-events-apis && sudo docker-compose up -d'
