@@ -123,14 +123,15 @@
                 </executions>
             </plugin>
 
-<!--            <plugin>-->
-<!--                <groupId>org.flywaydb</groupId>-->
-<!--                <artifactId>flyway-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <url>jdbc:postgresql://localhost:5432/friendevents</url>-->
-<!--                    <user>postgres</user>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/friendevents</url>
+                    <user>postgres</user>
+                    <password>postgres</password>
+                </configuration>
+            </plugin>
 
 <!--            &lt;!&ndash; plugin for code formatting &ndash;&gt;-->
 <!--            <plugin>-->
