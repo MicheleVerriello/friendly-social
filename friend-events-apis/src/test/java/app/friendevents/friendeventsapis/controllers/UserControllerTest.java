@@ -41,7 +41,7 @@ public class UserControllerTest {
 
         Mockito.when(userService.getUserById(1L)).thenReturn(Optional.of(user));
 
-        mockMvc.perform(get("/users/1")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/users/1")).andExpect(status().isOk());
 
         Mockito.verify(userService, Mockito.times(1)).getUserById(1L);
     }
@@ -83,7 +83,7 @@ public class UserControllerTest {
 
         mockMvc
             .perform(
-                post("/users/")
+                post("/api/users/")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonUser)
             )

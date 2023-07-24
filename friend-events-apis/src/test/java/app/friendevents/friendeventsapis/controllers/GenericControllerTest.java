@@ -22,6 +22,6 @@ public class GenericControllerTest {
      */
     @Test
     public void ping() throws Exception {
-        mockMvc.perform(get("/generic/ping")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/generic/ping")).andExpect(status().isOk());
     }
 }

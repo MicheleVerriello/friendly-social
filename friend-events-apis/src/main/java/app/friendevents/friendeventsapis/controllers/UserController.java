@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * This controller allows to perform basic CRUD operations about users
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
 
