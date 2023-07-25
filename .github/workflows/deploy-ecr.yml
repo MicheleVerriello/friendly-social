@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - 'master'
+      -
+jobs:
+  push-to-ecr:
+    name: Push to AWS ECR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        env:
+          AWS_REGION: your-aws-region  # Replace with your AWS region (e.g., us-east-1)
+          ECR_REGISTRY: your-ecr-registry  # Replace with your ECR registry URI (e.g., 123456789012.dkr.ecr.us-east-1.amazonaws.com)
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ env.AWS_REGION }}
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
+
+      - name: Build and push Docker image
+        env:
+          ECR_REGISTRY: your-ecr-registry  # Replace with your ECR registry URI (e.g., 123456789012.dkr.ecr.us-east-1.amazonaws.com)
+          IMAGE_TAG: latest  # Replace this with the tag you want to give to your image
+        run: |
+          docker build -t ${{ env.ECR_REGISTRY }}/your-image-name:${{ env.IMAGE_TAG }} .
+          docker push ${{ env.ECR_REGISTRY }}/your-image-name:${{ env.IMAGE_TAG }}
+
+  deploy-on-ec2:
