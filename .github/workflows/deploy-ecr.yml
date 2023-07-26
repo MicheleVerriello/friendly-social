@@ -1,0 +1,42 @@
+---
+name: Deploy from ECR to EC2
+
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - 'master'
+
+defaults:
+  run:
+    working-directory: ./friend-events-apis
+
+jobs:
+  push-to-ecr:
+    name: Push to AWS ECR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        env:
+          AWS_REGION: eu-north-1
+          ECR_REGISTRY: 887038481682.dkr.ecr.eu-north-1.amazonaws.com/friendevents
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ env.AWS_REGION }}
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
+
+      - name: Build and push Docker image
+        env:
+          ECR_REGISTRY: 887038481682.dkr.ecr.eu-north-1.amazonaws.com/friendevents
+          IMAGE_TAG: latest
+        run: |
+          docker build -t ${{ env.ECR_REGISTRY }}/friend-events:${{ env.IMAGE_TAG }} .
+          docker push ${{ env.ECR_REGISTRY }}/friend-events:${{ env.IMAGE_TAG }}
