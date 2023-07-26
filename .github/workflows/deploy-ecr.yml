@@ -1,3 +1,6 @@
+---
+name: Deploy from ECR to EC2
+
 on:
   push:
     branches:
@@ -5,6 +8,11 @@ on:
   pull_request:
     branches:
       - 'master'
+
+defaults:
+  run:
+    working-directory: ./friend-events-apis
+
 jobs:
   push-to-ecr:
     name: Push to AWS ECR
@@ -17,8 +25,8 @@ jobs:
       - name: Login to AWS ECR
         id: login-ecr
         env:
-          AWS_REGION: your-aws-region  # Replace with your AWS region (e.g., us-east-1)
-          ECR_REGISTRY: your-ecr-registry  # Replace with your ECR registry URI (e.g., 123456789012.dkr.ecr.us-east-1.amazonaws.com)
+          AWS_REGION: eu-north-1
+          ECR_REGISTRY: 887038481682.dkr.ecr.eu-north-1.amazonaws.com/friendevents
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -27,10 +35,8 @@ jobs:
 
       - name: Build and push Docker image
         env:
-          ECR_REGISTRY: your-ecr-registry  # Replace with your ECR registry URI (e.g., 123456789012.dkr.ecr.us-east-1.amazonaws.com)
-          IMAGE_TAG: latest  # Replace this with the tag you want to give to your image
+          ECR_REGISTRY: 887038481682.dkr.ecr.eu-north-1.amazonaws.com/friendevents
+          IMAGE_TAG: latest
         run: |
-          docker build -t ${{ env.ECR_REGISTRY }}/your-image-name:${{ env.IMAGE_TAG }} .
-          docker push ${{ env.ECR_REGISTRY }}/your-image-name:${{ env.IMAGE_TAG }}
-
-  deploy-on-ec2:
+          docker build -t ${{ env.ECR_REGISTRY }}/friend-events:${{ env.IMAGE_TAG }} .
+          docker push ${{ env.ECR_REGISTRY }}/friend-events:${{ env.IMAGE_TAG }}
