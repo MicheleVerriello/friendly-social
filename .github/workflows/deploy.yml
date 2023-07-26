@@ -72,11 +72,11 @@ jobs:
 
       - name: Stop all docker containers
         run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'sudo docker stop $(sudo docker ps -a -q)'
+          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'sudo docker stop $(sudo docker ps -aq)'
 
       - name: Remove all docker containers
         run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'sudo docker rm $(sudo docker ps -a -q)'
+          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'sudo docker rm $(sudo docker ps -aq)'
 
       - name: Remove all docker images
         run: |
