@@ -1,0 +1,26 @@
+<configuration>
+    <!-- Console appender (optional, for local testing) -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- CloudWatch appender -->
+    <appender name="CLOUDWATCH" class="com.amazonaws.services.logs.logback.CloudWatchAppender">
+        <logGroup>friend-events-apis-logs</logGroup>
+        <logStream>i-07de7b67e9e7d222c</logStream>
+        <layout>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </layout>
+        <awsCredentials>
+            <instanceProfile>true</instanceProfile> <!-- Use instance profile credentials (recommended in AWS environment) -->
+        </awsCredentials>
+    </appender>
+
+    <!-- Define the log level and appender references -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" /> <!-- Optional: Use if you want to log to the console for local testing -->
+        <appender-ref ref="CLOUDWATCH" /> <!-- Send logs to AWS CloudWatch -->
+    </root>
+</configuration>
