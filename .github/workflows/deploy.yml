@@ -80,7 +80,7 @@ jobs:
 
       - name: Remove all docker images
         run: |
-          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'sudo docker rmi $(sudo docker images -q)'
+          ssh -i sshconnection.pem -o "StrictHostKeyChecking=no" "$EC2_INSTANCE" 'sudo docker rmi -f $(sudo docker images -q)'
 
       - name: Build Backend Docker image
         run: |
