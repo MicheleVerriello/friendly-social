@@ -57,10 +57,10 @@ jobs:
 #          username: ${{ secrets.DOCKERHUB_USER }}
 #          password: ${{ secrets.DOCKERHUB_TOKEN }}
 #
-      - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+#       - name: Install SSH key
+#         uses: webfactory/ssh-agent@v0.5.0
+#         with:
+#           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Set permissions for private key
         run: |
