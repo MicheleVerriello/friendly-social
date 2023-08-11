@@ -133,7 +133,7 @@
                 </configuration>
             </plugin>
 
-<!--            &lt;!&ndash; plugin for code formatting &ndash;&gt;-->
+            <!-- plugin for code formatting -->
 <!--            <plugin>-->
 <!--                <groupId>com.diffplug.spotless</groupId>-->
 <!--                <artifactId>spotless-maven-plugin</artifactId>-->
