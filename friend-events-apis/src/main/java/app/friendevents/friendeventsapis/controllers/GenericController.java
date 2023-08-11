@@ -14,6 +14,6 @@ public class GenericController {
      */
     @GetMapping("/ping")
     public String ping() {
-        return "App Live On AWS EC2, Hello!";
+        return "App Live On AWS, Hello!";
     }
 }
