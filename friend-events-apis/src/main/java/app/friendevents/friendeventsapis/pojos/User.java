@@ -8,6 +8,7 @@ public class User extends BaseTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     String email;
     String username;
     String password;
